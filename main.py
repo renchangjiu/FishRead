@@ -12,7 +12,7 @@ from log import ReadLog
 @click.command()
 @click.option("-p", default="", help="文件路径, 若为空, 则读取阅读记录中的最后一条记录")
 @click.option("-r", default=1, help="每页显示的行数, 默认为: 1, 示例: 5")
-@click.option("-s", default=0, help="跳页, 默认为文件第一行, 示例: 12.35, 即跳到 12.35% 位置")
+@click.option("-s", default=0, type=float, help="跳页, 默认为文件第一行, 示例: 12.35, 即跳到 12.35% 位置")
 @click.option("-e", default="utf-8", help="文件编码, 默认为: utf-8, 示例: gbk")
 @click.option("-c", default=1, help="每次翻页是否清屏, 1清屏/0不清屏, 默认为: 1, 示例: 0")
 def main(p, r, s, e, c):
@@ -31,7 +31,7 @@ def main(p, r, s, e, c):
     clear = c
 
     # 阅读进度(当前行数/总行数)
-    schedule = s
+    schedule = s / 100
 
     lines = read_txt(book_path, encoding)
     tip(book_path)
