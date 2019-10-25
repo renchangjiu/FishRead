@@ -8,6 +8,8 @@ import click
 from app_attribute import AppAttribute as app
 from log import ReadLog
 
+null = None
+
 
 @click.command()
 @click.option("-p", default="", help="文件路径, 若为空, 则读取阅读记录中的最后一条记录")
@@ -119,10 +121,14 @@ def read_txt(path: str, encoding: str) -> list:
         file = open(path, mode="r", encoding=encoding)
         lines = file.readlines()
         file.close()
+        ret = []
+        for line in lines:
+            if line is not null and line.strip() != "":
+                ret.append(line)
+        return ret
     except UnicodeDecodeError:
         print("无法以%s编码打开文件, 请选择其他编码方式" % encoding)
         sys.exit(1)
-    return lines
 
 
 if __name__ == "__main__":
