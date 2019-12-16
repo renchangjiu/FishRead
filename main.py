@@ -105,7 +105,7 @@ def is_clear_key(key):
 def tip(book_path):
     """提示性输出"""
     print(os.path.basename(book_path))
-    print("按下 '下方向键' 向下翻页")
+    print("按下 'S' 向下翻页, 按下 'W' 向上翻页")
     print("按下 'q' 退出")
 
 
